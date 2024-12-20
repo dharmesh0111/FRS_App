@@ -81,6 +81,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -150,3 +152,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'dharmeshhh011@gmail.com'
 EMAIL_HOST_PASSWORD = 'ltku soeb onnj agtw'
+
+
+APPEND_SLASH=True

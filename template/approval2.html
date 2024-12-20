@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa; /* Light background */
+            background-color: #f8f9fa;
             margin: 0;
             padding: 20px;
         }
@@ -18,7 +18,7 @@
             color: #333;
             margin-top: 20px;
             font-size: 28px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .logout-button {
@@ -40,7 +40,6 @@
             transform: scale(1.05);
         }
 
-        /* Logo and text */
         .logo-container {
             position: absolute;
             top: 20px;
@@ -50,7 +49,7 @@
         }
 
         .logo-container img {
-            width: 40px; /* Adjust the size of the logo */
+            width: 40px;
             height: auto;
             margin-right: 10px;
         }
@@ -68,7 +67,8 @@
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            table-layout: fixed; /* Ensures uniform column widths */
         }
 
         th, td {
@@ -76,6 +76,7 @@
             padding: 10px;
             text-align: left;
             font-size: 14px;
+            word-wrap: break-word; /* Handles text overflow */
         }
 
         th {
@@ -90,44 +91,6 @@
 
         tr:hover {
             background-color: #f1f1f1;
-        }
-
-        .action-buttons {
-            display: flex; /* Use flexbox to align buttons inline */
-            gap: 10px; /* Space between the buttons */
-        }
-
-        .action-buttons a {
-            display: inline-block; /* Ensure buttons are displayed inline */
-            padding: 8px 10px;
-            border-radius: 5px;
-            font-size: 13px;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 20px;
-        }
-
-        .approve {
-            background-color: #28a745; /* Green button */
-            /* margin: 15px; */
-        }
-
-        .approve:hover {
-            background-color: #218838;
-            transform: scale(1.05);
-        }
-
-        .reject {
-            background-color: #dc3545; /* Red button */
-            /* margin: 15px; */
-
-        }
-
-        .reject:hover {
-            background-color: #c82333;
-            transform: scale(1.05);
         }
 
         .comment-box {
@@ -150,28 +113,44 @@
             outline: none;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
+        /* Styling for Approval 2 buttons */
+.action-buttons a {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px;
+    text-align: center;
+    margin-left: 2px;
+}
 
-        button {
-            background-color: #007bff; /* Blue submit button */
-            border: none;
-            padding: 8px 15px;
-            color: white;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        
-        }
+.action-buttons .approve {
+    background-color: #28a745; /* Green for approve */
+}
 
-        button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
+.action-buttons .approve:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05);
+}
+
+.action-buttons .reject {
+    background-color: #dc3545; /* Red for reject */
+}
+
+.action-buttons .reject:hover {
+    background-color: #c82333; /* Darker red on hover */
+    transform: scale(1.05);
+}
+
+
+
     </style>
 </head>
 <body>
-    <!-- Logo and text -->
     <div class="logo-container">
         <img src="{% static 'img/ashoka.png' %}" alt="MyWebsite Logo" style="height: 60px; width: 200px;">
     </div>
@@ -187,30 +166,32 @@
     <table>
         <thead>
             <tr>
-                <th>FR Date</th>
-                <th>Company Code</th>
-                <th>Plant Code</th>
-                <th>Vendor Name</th>
-                <th>Vendor Code</th>
-                <th>Quantity</th>
-                <th>PO Number</th>
-                <th>Material Document Number</th>
-                <th>GL Account Number</th>
-                <th>Currency</th>
-                <th>Invoice</th>
-                <th>Invoice Date</th>
-                <th>Invoice Amount</th>
-                <th>TDS</th>
-                <th>Sub Total</th>
-                <th>FR Amount</th>
-                <th>Approval 1</th>
-                <th>Approval 2</th>
-                <th>Comments</th>
+                <th style="width: 3%;">Sr No.</th>
+                <th style="width: 5%;">FR Date</th>
+                <th style="width: 6%;">Company Code</th>
+                <th style="width: 5%;">Plant Code</th>
+                <th style="width: 10%;">Vendor Name</th>
+                <th style="width: 5%;">Vendor Code</th>
+                <th style="width: 6%;">Quantity</th>
+                <th style="width: 5%;">PO Number</th>
+                <th style="width: 7%;">Material Document Number</th>
+                <th style="width: 7%;">GL Account Number</th>
+                <th style="width: 6%;">Currency</th>
+                <th style="width: 5%;">Invoice</th>
+                <th style="width: 5%;">Invoice Date</th>
+                <th style="width: 5%;">Invoice Amount</th>
+                <th style="width: 5%;">TDS</th>
+                <th style="width: 5%;">Sub Total</th>
+                <th style="width: 5%;">FR Amount</th>
+                <th style="width: 7%;">Approval 1</th>
+                <th style="width: 16%;">Approval 2</th>
+                <th style="width: 11%;">Comments</th>
             </tr>
         </thead>
         <tbody>
             {% for invoice in invoices %}
             <tr>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ invoice.fr_date }}</td>
                 <td>{{ invoice.company_code }}</td>
                 <td>{{ invoice.plant_code }}</td>
@@ -229,13 +210,16 @@
                 <td>{{ invoice.fr_amount }}</td>
                 <td>{{ invoice.approval1 }}</td>
                 {% if invoice.approval2 == "waiting" %}
-                <td class="action-buttons">
+                <td>
+                    <div class="action-buttons">
                     <a href="{% url 'statusAPP2' invoice.id 1 %}" class="approve">Approve</a>
                     <a href="{% url 'statusAPP2' invoice.id 0 %}" class="reject">Reject</a>
+                    </div>
                 </td>
                 {% else %}
                 <td>{{ invoice.approval2 }}</td>
                 {% endif %}
+                {% if invoice.approval2 != "Approved" and invoice.approval2 != "Rejected" %}
                 <td>
                     <form action="/comment/{{ invoice.id }}/" method="get">
                         {% csrf_token %}
@@ -248,10 +232,13 @@
                         <button type="submit">Submit</button>
                     </form>
                 </td>
+                {% else %}
+                <td>{{ invoice.commentsAPP2 }}</td>
+                {% endif %}
             </tr>
             {% empty %}
             <tr>
-                <td colspan="19">No invoices found.</td>
+                <td colspan="20">No invoices found.</td>
             </tr>
             {% endfor %}
         </tbody>

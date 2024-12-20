@@ -181,30 +181,32 @@
     <table>
         <thead>
             <tr>
-                <th>FR Date</th>
-                <th>Company Code</th>
-                <th>Plant Code</th>
-                <th>Vendor Name</th>
-                <th>Vendor Code</th>
-                <th>Quantity</th>
-                <th>PO Number</th>
-                <th>Material Document Number</th>
-                <th>GL Account Number</th>
-                <th>Currency</th>
-                <th>Invoice</th>
-                <th>Invoice Date</th>
-                <th>Invoice Amount</th>
-                <th>TDS</th>
-                <th>Sub Total</th>
-                <th>FR Amount</th>
-                <th>Approval 1</th>
-                <th>Approval 2</th>
-                <th>Comments</th>
+                <th style="width: 5%;">Sr No.</th>
+                <th style="width: 5%;">FR Date</th>
+                <th style="width: 5%;">Company Code</th>
+                <th style="width: 5%;">Plant Code</th>
+                <th style="width: 10%;">Vendor Name</th>
+                <th style="width: 5%;">Vendor Code</th>
+                <th style="width: 5%;">Quantity</th>
+                <th style="width: 5%;">PO Number</th>
+                <th style="width: 5%;">Material Document Number</th>
+                <th style="width: 5%;">GL Account Number</th>
+                <th style="width: 5%;">Currency</th>
+                <th style="width: 5%;">Invoice</th>
+                <th style="width: 5%;">Invoice Date</th>
+                <th style="width: 5%;">Invoice Amount</th>
+                <th style="width: 5%;">TDS</th>
+                <th style="width: 5%;">Sub Total</th>
+                <th style="width: 5%;">FR Amount</th>
+                <th style="width: 5%;">Approval 1</th>
+                <th style="width: 5%;">Approval 2</th>
+                <th style="width: 15%;">Comments</th>
             </tr>
         </thead>
         <tbody>
             {% for invoice in invoices %}
             <tr>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ invoice.fr_date }}</td>
                 <td>{{ invoice.company_code }}</td>
                 <td>{{ invoice.plant_code }}</td>
@@ -243,6 +245,8 @@
                     {% endif %}
                 </td>
                 <td>{{ invoice.approval2 }}</td>
+
+                {% if invoice.approval1 != "Approved" and invoice.approval1 != "Rejected" %}
                 <td>
                     <form action="/comment/{{ invoice.id }}/" method="post">
                         {% csrf_token %}
@@ -255,6 +259,9 @@
                         <button type="submit">Submit</button>
                     </form>
                 </td>
+                {% else %}
+                <td class="comment-box">{{ invoice.commentsAPP1 }}</td>
+                {% endif %}
             </tr>
             {% empty %}
             <tr>
