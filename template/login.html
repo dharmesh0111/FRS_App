@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for a clean UI */
+            font-family: Arial, sans-serif;
+            color: #333; /* Dark text for better readability */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(182, 155, 5); /* Gold color for the logo */
+            margin: 30px;
+        }
+
+        .application-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(8, 8, 8); /* Gold text for the title */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for a professional look */
+            margin-top: 20px;
+        }
+
+        .box {
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 10px;
+            background-color: #fff; /* White background */
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 400px;
+            margin: auto; /* Center the box horizontally */
+            
+            
+        }
+
+        .form-control {
+            background-color: #fff; /* White background for inputs */
+            border: 1px solid #ccc; /* Light grey border */
+            color: #333; /* Dark text for inputs */
+        }
+
+        .form-control:focus {
+            border-color: rgb(182, 155, 5); /* Gold outline on focus */
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Subtle glow effect */
+        }
+
+        .btn-primary {
+            background-color: rgb(182, 155, 5); /* Gold button background */
+            border-color: gold; /* Gold button border */
+            color: white; /* White text on buttons */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #d4af37; /* Darker gold on hover */
+            border-color: #d4af37; /* Darker gold border on hover */
+        }
+
+        .form-links a {
+            color: rgb(182, 155, 5); /* Gold links */
+            text-decoration: none;
+        }
+
+        .form-links a:hover {
+            text-decoration: underline;
+            color: #d4af37; /* Darker gold on hover */
+        }
+
+        .exit {
+            font-size: 25px;
+            display: flex;
+            justify-content: end;
+            color: #aaa; /* Subtle exit icon color */
+        }
+
+        .exit:hover {
+            color: rgb(182, 155, 5); /* Gold on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="{% static 'img/ashoka.png' %}" alt="MyWebsite Logo" style="height: 60px;">
+
+    </div>
+    <div  style="margin-top:60px;" class="application-title">Funds Requirement Statement Application</div>
+
+    <div class="box text-center mt-5">
+        <a href="/" class="exit"><i class="bi bi-box-arrow-left"></i></a>
+        <h4 class="mt-2">LOGIN </h4>
+        {% for m in messages %}
+        <div class="alert text-{{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+        <form action="/login" method="post" class="mt-4">
+            {% csrf_token %}
+            <div sty class="form-group">
+                <label for="username">* Your Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">* Your Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-4">LOGIN</button>
+            <div class="form-links mt-4" style="font-size: 15px;">
+                <a href="/register" style="margin: 10px;">Create account</a>
+                <a href="/password_reset">Forgot your password?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

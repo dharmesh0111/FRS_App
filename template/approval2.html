@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice List - Approval 2</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .logout-button {
+            background-color: #aa7209;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #c4a108;
+            transform: scale(1.05);
+        }
+
+        /* Logo and text */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 40px; /* Adjust the size of the logo */
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .logo-container .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #555;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-buttons {
+            display: flex; /* Use flexbox to align buttons inline */
+            gap: 10px; /* Space between the buttons */
+        }
+
+        .action-buttons a {
+            display: inline-block; /* Ensure buttons are displayed inline */
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .approve {
+            background-color: #28a745; /* Green button */
+            /* margin: 15px; */
+        }
+
+        .approve:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .reject {
+            background-color: #dc3545; /* Red button */
+            /* margin: 15px; */
+
+        }
+
+        .reject:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .comment-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 13px;
+            resize: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .comment-box::placeholder {
+            color: #666;
+            font-style: italic;
+        }
+
+        .comment-box:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            background-color: #007bff; /* Blue submit button */
+            border: none;
+            padding: 8px 15px;
+            color: white;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo and text -->
+    <div class="logo-container">
+        <img src="{% static 'img/ashoka.png' %}" alt="MyWebsite Logo" style="height: 60px; width: 200px;">
+    </div>
+
+    <a href="/logout" class="logout-button">Logout</a>
+    <h1 style="margin-top: 100px;">Funds Requirement Statement Application</h1>
+    <h1>Approval 2</h1>
+
+    {% for m in messages %}
+    <div class="alert text-{{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>FR Date</th>
+                <th>Company Code</th>
+                <th>Plant Code</th>
+                <th>Vendor Name</th>
+                <th>Vendor Code</th>
+                <th>Quantity</th>
+                <th>PO Number</th>
+                <th>Material Document Number</th>
+                <th>GL Account Number</th>
+                <th>Currency</th>
+                <th>Invoice</th>
+                <th>Invoice Date</th>
+                <th>Invoice Amount</th>
+                <th>TDS</th>
+                <th>Sub Total</th>
+                <th>FR Amount</th>
+                <th>Approval 1</th>
+                <th>Approval 2</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.fr_date }}</td>
+                <td>{{ invoice.company_code }}</td>
+                <td>{{ invoice.plant_code }}</td>
+                <td>{{ invoice.vendor_name }}</td>
+                <td>{{ invoice.vendor_code }}</td>
+                <td>{{ invoice.quantity }}</td>
+                <td>{{ invoice.po_number }}</td>
+                <td>{{ invoice.material_document_number }}</td>
+                <td>{{ invoice.gl_account_number }}</td>
+                <td>{{ invoice.currency }}</td>
+                <td>{{ invoice.invoice }}</td>
+                <td>{{ invoice.invoice_dt }}</td>
+                <td>{{ invoice.invoice_amt }}</td>
+                <td>{{ invoice.tds }}</td>
+                <td>{{ invoice.sub_total }}</td>
+                <td>{{ invoice.fr_amount }}</td>
+                <td>{{ invoice.approval1 }}</td>
+                {% if invoice.approval2 == "waiting" %}
+                <td class="action-buttons">
+                    <a href="{% url 'statusAPP2' invoice.id 1 %}" class="approve">Approve</a>
+                    <a href="{% url 'statusAPP2' invoice.id 0 %}" class="reject">Reject</a>
+                </td>
+                {% else %}
+                <td>{{ invoice.approval2 }}</td>
+                {% endif %}
+                <td>
+                    <form action="/comment/{{ invoice.id }}/" method="get">
+                        {% csrf_token %}
+                        <textarea 
+                            name="comment" 
+                            placeholder="{{ invoice.commentsAPP2 }}" 
+                            rows="2" 
+                            class="comment-box"
+                        ></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="19">No invoices found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
